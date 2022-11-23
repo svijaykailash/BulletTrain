@@ -1,0 +1,49 @@
+
+
+1) docker build -t <id> .
+Command >> docker build -t vj_docker . 
+------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+2) docker run -v <local_data_path>:/data:ro -v <local_writable_area_path>:/wdata -it <id>
+Command >> docker run -v /c/users/user/documents/topcoder/submission/code/data:/data:ro -v /c/users/user/documents/topcoder/submission/solution:/wdata -it vj_docker
+
+------------------------------------------------------------------------------------------------------------------------------------------------------------- 
+3)  Training: ./train.sh ./data/<training.csv>
+    Testing: ./test.sh ./data/<final_unlabelled.csv> .</wdata/output_folder>
+
+    Training: Command >>  ./train.sh ./data/data-training.csv
+    Testing: Command  >>  ./test.sh ./data/data-provisional.csv ./data/solution.csv
+
+----------------------END-----------------------------------------------
+
+
+<<Results from Docker Image Build>>
+
+User@DESKTOP-SOE2UF8 MINGW64 ~/Documents/TopCoder/submission/code
+$ docker build -t vj_docker .
+[+] Building 1241.1s (15/15) FINISHED
+ => [internal] load build definition from Dockerfile                                                                       1.7s 
+ => => transferring dockerfile: 32B                                                                                        0.8s 
+ => [internal] load .dockerignore                                                                                          1.9s 
+ => => transferring context: 2B                                                                                            0.4s 
+ => [internal] load metadata for docker.io/library/ubuntu:20.04                                                            6.7s 
+ => [auth] library/ubuntu:pull token for registry-1.docker.io                                                              0.0s 
+ => [1/9] FROM docker.io/library/ubuntu:20.04@sha256:450e066588f42ebe1551f3b1a535034b6aa46cd936fe7f2c6b0d72997ec61dbd      0.0s 
+ => [internal] load build context                                                                                          0.7s 
+ => => transferring context: 1.13kB                                                                                        0.2s 
+ => CACHED [2/9] RUN apt-get update && apt-get install -y --no-install-recommends python3.9 python3-pip                    0.0s 
+ => CACHED [3/9] COPY reqt.txt .                                                                                           0.0s 
+ => [4/9] RUN pip3 install -r reqt.txt                                                                                   956.3s
+ => [5/9] RUN mkdir /work                                                                                                 40.1s 
+ => [6/9] COPY . /work                                                                                                     9.2s 
+ => [7/9] WORKDIR /work                                                                                                    5.1s 
+ => [8/9] RUN chmod +x test.sh                                                                                            22.6s 
+ => [9/9] RUN chmod +x train.sh                                                                                           14.0s 
+ => exporting to image                                                                                                   172.9s 
+ => => exporting layers                                                                                                  171.8s 
+ => => writing image sha256:0f30d0ff96e3df0f8578b72b5bde75dbbb4d586139b7d44eab2748f7c80cc570                               0.5s 
+ => => naming to docker.io/library/vj_docker                                                                               0.2s 
+
+Use 'docker scan' to run Snyk tests against images to find vulnerabilities and learn how to fix them
+
+User@DESKTOP-SOE2UF8 MINGW64 ~/Documents/TopCoder/submission/code
